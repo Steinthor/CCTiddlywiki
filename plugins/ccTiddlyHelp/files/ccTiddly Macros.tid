@@ -1,0 +1,23 @@
+tags: ccTiddly excludeSearch excludeLists
+
+
+!!!{{{<<ccUpload>>}}}
+If enabled on the server users can upload files to the ccTiddly server
+
+!!!{{{<<ccLogin>>}}}
+Displays the login box if the users is not logged in, if the user is logged in they are shown a logout button
+
+!!!{{{<<ccLoginStatus>>}}}
+As with {{{<<ccLogin>>}}} except this displays a link to the login tiddler so can be used where space is tight. 
+
+!!!{{{<<ccCreateWorkspace>>}}}
+Allows users with permission to create a workspace and define its permissions.
+
+!!!{{{<<ccEditWorkspace>>}}}
+Allows admin users to change the permission of a workspace.
+
+!!!{{{<<ccAdmin>>}}}
+Allows admin users to add and remove admin users for a workspace.
+
+!!!{{{<<ccVersion>>}}}
+Allows users to confirm which version of ccTiddly they are using.

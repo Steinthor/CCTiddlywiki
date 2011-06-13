@@ -1,0 +1,220 @@
+tags: ccTiddly excludeSearch excludeLists 
+
+
+!!!{{{<<today>>}}}
+Shows current date.
+
+!!!{{{<<version>>}}} 
+This macro shows the version number of the current TiddlyWiki document.
+
+!!!{{{<<Alltags>>}}}
+Lists all tags. Clicking on a tag lists all the tiddlers assigned that tag. 
+
+!!!{{{<<List [type]>>}}} 
+Parameters : (all (default), missing, orphans, shadowed, touched, filter)
+
+!!!{{{<<Timeline [date] [length] [format]>>}}} 
+ The timeline macro creates a list of tiddlers sorted by a date specified.
+
+Example : 
+{{{<<timeline "modified" "0" "ddd, YYYY-0MM-0DD">>}}}
+
+Produces : 
+<<timeline "modified" "0" "ddd, YYYY-0MM-0DD">>
+!!!{{{<<Slider cookie tiddler label tooltip>>}}}
+The slider macro allows embedding tiddlers within another tiddler, with the option to toggle the visibility of the transcluded contents.
+
+    * cookie: variable to save the state of the slider
+    * tiddler: name of the tiddler to include in the slider
+    * label: title text of the slider
+    * tooltip: tooltip text of the slider 
+
+ Example
+{{{<<slider chkTestSlider [[OptionsPanel]] "Options" "Open advanced options">>}}}
+
+Produces : 
+<<slider chkTestSlider [[OptionsPanel]] "Options" "Open advanced options">>
+!!!{{{<<Tabs>>}}}
+The tabs macro creates an area where it displays one of several tiddlers alternately, as the user clicks on the tab labels at the top.
+
+It is used like this:
+
+{{{<<tabs ID Label1 Tip1 Tiddler1 Label2 Tip2 Tiddler2 [Label3 ...]>>}}}
+
+produces :
+<<tabs ID Label1 Tip1 Tiddler1 Label2 Tip2 Tiddler2 [Label3 ...]>>
+
+    * ID: specifies the name of a cookie used to save the information about which tab was displayed last.
+    * Label1, Label2, ... define the labels that are displayed at the top of the area for each tab
+    * Tip1, Tip2, ... define tooltips that explain, somewhat more verbosely than the labels, what you can expect to find on each tab.
+    * Tiddler1, Tiddler2, ... name the tiddlers that are displayed on each tab. 
+
+Obviously, there must be exactly three strings for each tab.
+
+The syntax for the tabs macro looks like this:
+
+{{{<<tabs txt[cookieName]
+	"[label]" "[title]" [[tiddler]]
+	"[label]" "[title]" [[tiddler]]
+	...
+     >>}}}
+
+produces :
+
+<<tabs txt[cookieName]
+	"[label]" "[title]" [[tiddler]]
+	"[label]" "[title]" [[tiddler]]
+	...
+     >>
+
+!!!{{{<<Tagging [tag]>>}}}
+This macro generates a list of tiddlers that carry the specified tag.
+
+<<tagging [tag]>>
+
+If the tag parameter is not specified, the current tiddler's name will be used instead.
+!!!{{{<<Tagchooser>>}}}
+!!!{{{<<NewJournal>>}}}
+This macro generates a button to create a journal tiddler, using the current time and date as title.
+
+It is otherwise identical to the NewTiddler macro.
+
+Example : 
+{{{<<newJournal [date format]>>}}}
+
+Produces : 
+<<newJournal [date format]>>
+
+The optional parameter can be used to specify a custom date format.
+
+In addition, all of the NewTiddler macro's parameters are valid.
+
+!!!{{{<<NewTiddler>>}}}
+
+ Usage
+
+<<newTiddler [parameters]>>
+
+Parameters
+
+This macro uses named parameters. All parameters are optional.
+|Parameter|Description|
+|label |button label|
+|prompt|button tooltip|
+|title|title for the new tiddler (defaults to "New Tiddler")|
+|text|contents for the new tiddler|
+|tag|tag to be applied to the new tiddler (parameter can be used repeatedly to specify multiple tags)|
+|accessKey|single letter to use as access key to trigger the button|
+|focus|which of the editable fields to default the focus to (e.g. "title", "text", "tags")|
+|template|template tiddler to use to display the new tiddler (defaults to EditTemplate)|
+|fields|custom fields to be assigned to the new tiddler, in name:value;name:value; format|
+
+Only fields contained as input fields in the specified template can be primed with an initial value.
+[edit] Example
+
+<<newTiddler
+	label:"New Tiddler"
+	text:"Hello world."
+	tag:"test"
+	tag:"an example"
+	accessKey:"1"
+	focus:"tags"
+>>
+
+
+
+!!!{{{<<saveChanges>>}}}
+
+
+
+!!!{{{<<Search>>}}}
+
+This macro creates an input field to perform full-text searches on a TiddlyWiki document's tiddler contents.
+[edit] Usage
+
+Example : 
+{{{<<search [value]>>}}}
+
+Produces : 
+
+<<search [value]>>
+
+By specifiying the value parameter, the search form can be "preloaded" with the desired term.
+[edit] Options
+This section is still incomplete. You can help by contributing to its expansion.
+Please improve the article, or discuss the issue on the talk page.
+
+    * case-sensitive
+    * regular expressions 
+
+
+!!!{{{<<Gradient>>}}}
+
+The Gradient macro allows simple horizontal and vertical coloured gradients. They are constructed from coloured HTML elements, and don't require any images to work.
+The Gradient macro is an extended macro that processes the text after it up until the next '
+
+>>
+
+' sequence. It looks like this:
+Example : 
+{{{<<gradient vert #ffffff #ffdddd #ff8888>>gradient fill>>}}}
+
+Produces : 
+<<gradient vert #ffffff #ffdddd #ff8888>>gradient fill>>
+
+The first parameter can be vert or horiz to indicate the direction of the gradient. The following parameters are two or more colours (CSS RGB(r,g,b) format is also acceptable). The macro constructs a smooth linear gradient between each of the colours in turn.
+
+Inline CSS definitions can be added to gradient fills like this:
+
+
+Example : 
+{{{<<gradient vert #000000 #660000 #aa2222>>color:#ffffff;font-size:12pt;Darkness>>}}}
+
+Produces : 
+<<gradient vert #000000 #660000 #aa2222>>color:#ffffff;font-size:12pt;Darkness>>
+
+!!!{{{<<Closeall>>}}}
+!!!{{{<<Permaview>>}}}
+Changes the browser address bar to a permalink to the current Tiddler or the set of open tiddlers. It is used with the ToolbarMacro like this:
+
+Example : 
+{{{<<toolbar permalink>>}}}
+Produces : 
+<<toolbar permalink>>
+
+!!!{{{<<Toolbar>>}}}
+The ToolbarMacro is used in the TemplateMechanism to define the toolbar that appearthat appear either in EditMode or in ViewMode. The arguments to the ToolbarMacro is a list of command names, as discussed in the CommandMechanism..
+
+You can precede a command name with a "+" to specify a default command that is automatically chosen when a tiddler is double-clicked, or the ctrl-Enter key combination pressed. Similarly, precede it with "-" to specify a command to be chosen when the Escape key is pressed.
+!!!{{{<<Annotations>>}}}
+
+!!!{{{<<Edit>>}}}
+The command <<edit>> switches from ViewMode to EditMode. The EditMacro is either a double mouse click inside the tiddler or the entry 'edit' in the tiddler's Toolbar. It is used in ViewTemplate as ToolbarMacro like this:
+Example : 
+{{{<<toolbar +editTiddler>>}}}
+Produces : 
+<<toolbar +editTiddler>>
+
+!!!{{{<<Message>>}}}
+!!!{{{<<Refreshdisplay>>}}}
+!!!{{{<<View fieldname how...>>}}}
+Retrieves a specified field (given by fieldname) from the tiddler to be displayed and outputs its value in one of the following ways (the optional //how// parameter):
+
+    * (unspecified): render as is (without formatting)
+    * link: format as a link (using createTiddlyLink)
+    * wikified: format using all the normal rendering rules
+    * date: expects a value of the form YYYYMMDDHHMM and outputs it using either a specified format (...) or config.views.wikified.dateFormat 
+
+The standard field names are:
+
+    * title - the tiddler title
+    * tiddler - the tiddler title (as well)
+    * text - the text of the tiddler
+    * modifier - the person who last modified it
+    * modified - date&time of last modification
+    * created - when it was created
+    * tags - the tiddler tags 
+
+If your tiddlers contain custom fields, they could be specified as well.
+
+The view macro is used extensively in the standard tiddler rendering templates (ViewTemplate and EditTemplate).

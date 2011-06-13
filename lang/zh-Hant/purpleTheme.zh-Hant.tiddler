@@ -1,0 +1,701 @@
+<div title="purpleTheme" modifier="BramChen" modified="200811141500" tags="systemTheme excludeSearch excludeLists">
+<pre>
+/***
+|''Name:''|purpleThemeh.zh-Hant|
+|''Description:''|A theme with lots of white space and a clean and elegant purple presentation|
+|''Author:''|Saq Imtiaz and Simon McManus|
+|''License:''|[[Creative Commons Attribution-ShareAlike 2.5 License|http://creativecommons.org/licenses/by-sa/2.5/]] |
+|''~CoreVersion:''|2.4.1|
+|''~PageTemplate:''|##PageTemplate|
+|''~StyleSheet:''|##StyleSheet|
+|''~taskViewTemplate:''|##taskViewTemplate|
+|''~taskEditTemplate:''|##taskEditTemplate|
+|''~EditTemplate:''|##EditTemplate|
+|''~ViewTemplate:''|##ViewTemplate|
+***/
+
+!PageTemplate
+<!--{{{-->
+<div id='bodywrapper'>
+<div class='header' macro='gradient vert #ccc #eee'>
+<span class='siteTitle' refresh='content' tiddler='SiteTitle'></span>
+<span class='siteSubtitle' refresh='content' tiddler='SiteSubtitle'></span>
+<div id='mainMenu' refresh='content' tiddler='MainMenu'></div>
+</div>
+<div id='sidebar'>
+<div id='sidebarOptions' refresh='content' tiddler='purpleTheme##SideBarOptions'></div>
+</div>
+<div id='displayArea'>
+<div id='messageArea'></div>
+<div id='tiddlerDisplay'></div>
+</div>
+</div>
+<div id='contentFooter'  macro='gradient vert #eee #ccc'></div>
+<!--}}}-->
+
+!taskViewTemplate
+<!--{{{-->
+<div class='toolbar' macro='toolbar closeTiddler closeOthers +editTiddler > fields syncing permalink references jump'></div>
+<div class='title' macro='view title'>Task : </div>
+<div class='task'>
+	<table>
+	<tr>
+		<td class='taskbody' width=100%><div class='viewer' macro='view text wikified'></div></td>
+		<td class='taskControls' valign='top'><div class='taskControls' macro='tiddler TaskTiddlerControls'></td>
+	</tr>
+	</table>
+</div>
+
+<div class='subtitle'><span macro='view modifier link'></span>, <span macro='view modified date'></span> (<span macro='message views.wikified.createdPrompt'></span> <span macro='view created date'></span>)</div>
+<div class='tagging' macro='tagging'></div>
+<div class='tagged' macro='tags'></div>
+<div class='tagClear'></div>
+<!--}}}-->
+
+!taskEditTemplate
+<!--{{{-->
+<div class="editor">
+<div class='toolbar' macro='toolbar [[ToolbarCommands::EditToolbar]]'></div>
+<div class='task'>
+	<table>
+	<tr><td colspan=2><div class='title edit' macro='edit title'></div>
+	</td></tr>
+	<tr>
+		<td class='taskbody' width=100% height=100%><div class='viewer edit' macro='edit text wikified'></div></div></td>
+		<td class='taskControls' valign=top><div class='taskControls' macro='tiddler TaskTiddlerControls'></td>
+	</tr>
+	</table>
+</div>
+<div class='editor' macro='edit tags'></div>
+<div class='subtitle'>最近更新: <span macro='view modifier link'></span>, <span macro='view modified date'></span></div>
+</div>
+<!--}}}-->
+
+!EditTemplate
+<!--{{{-->
+<div class='toolbar' macro='toolbar [[ToolbarCommands::EditToolbar]]'></div>
+<div class='editor' macro='edit title'></div>
+<div macro='annotations'></div>
+<div class='editor' macro='edit text'></div>
+<div class='editor' macro='edit tags'></div><div class='editorFooter'><span macro='message views.editor.tagPrompt'></span><span macro='tagChooser'></span></div>
+<!--}}}-->
+
+!ViewTemplate
+<!--{{{-->
+<div class='toolbar' macro='toolbar [[ToolbarCommands::ViewToolbar]]'></div>
+<div class='title' macro='view title'></div>
+<div class='viewer' macro='view text wikified'></div>
+<div class='tagging' macro='tagging'></div>
+<div class='tagged' macro='tags'></div>
+<div class='tagClear'></div>
+<div class='subtitle'>最近更新: <span macro='view modifier link'></span>, <span macro='view modified date'></span> (<span macro='message views.wikified.createdPrompt'></span> <span macro='view created date'></span>)</div>
+<hr />
+<!--}}}-->
+
+!OptionsPanel
+[[說明|Help]] <br />[[設定|AdvancedOptions]]<br /><<ccOptions>>
+
+!SideBarOptions
+<<search "尋找...">><<closeAll>><<newTiddler>><<newTiddler label:"新增任務" text:"新任務內容" title:"新增任務" tag:"task">><<saveChanges>><<slider chkSliderOptionsPanel purpleTheme##OptionsPanel "偏好設定 »" "變更 TiddlyWiki 選項">><<slider 'chkLoginStatus' 'LoginStatus' '  狀態 »' '依登入帳號而異'>><<slider chkSliderTabs SideBarTabs '內容 »' '檢視歸檔頁籤'>>
+
+!StyleSheet
+/***
+General
+***/
+/*{{{*/
+
+body, html{
+	background-color: #999999;
+	color:#333;
+//	background:url(http://www.thefabricdeli.com/assets/images/qud21112-purple.jpg);
+//	background:url(http://mr-pc.org/inc/paisleyTileSmall.png);
+
+}
+
+#backstageCloak {
+opacity:0.8; filter:'alpha(opacity:70)';
+background:black;
+}
+.tiddler .button {
+	line-height:4;
+	margin:5px;
+	padding:8px;
+}
+
+body .chkOptionInput {
+width:auto;
+	float:right;
+}
+
+#contentWrapper .wizard .txtOptionInput {
+	width:7em;
+}
+
+.wizard  .txtOptionInput{
+text-align:right;
+	border:1px solid #ccc;
+}
+
+#contentWrapper .sliderPanel .tabsetWrapper .tabContents {
+	border:0px;
+	background-color:white;
+}
+
+
+.header {
+background-color:#eee;
+}
+
+
+#messageArea {
+	border:1px solid white;
+	background-color:#eee;
+}
+
+#messageArea .button{
+	background:none;
+}
+
+h1 {
+	color:black;
+}
+
+#contentWrapper{
+	position:relative;
+	margin: 2.5em auto;
+	width:780px;
+	line-height: 1.6em;
+	border:1px solid #ccc;
+	font-size: 11px;
+	font-family: Lucida Grande, Tahoma, Arial, Helvetica, sans-serif;
+	height:1%;
+//	display:table;
+	background-color:#eee;
+}
+
+.clearAll{
+	clear:both;
+}
+
+.tagClear{
+	clear:none;
+}
+/*}}}*/
+
+/*{{{*/
+.siteTitle {
+	font-family: 'Trebuchet MS' sans-serif;
+	font-weight: bold;
+	position:relative;
+	top:20px;
+	left :20px;
+	font-size: 32px;
+	color:Purple;
+}
+
+.siteSubtitle {
+	padding-top:15px;
+	font-size: 1.0em;
+	display:block; 
+	color: #999; margin-top:0.5em !important; margin-top:1em; margin-left:3em;
+	padding-top:3em;
+}
+
+#displayArea {
+	margin-left:1.35em;
+	margin-right:16.3em;
+	margin-top:0;
+	padding-top:1em;
+	padding-bottom:10px;
+}
+
+#sidebarOptions input {
+	border:1px solid #ddd;
+}
+
+.tabUnselected {
+	background:#eee none repeat scroll 0%;
+	color:#999;
+}
+
+#sidebar{
+	position:inherit;
+	float:right;
+	display:inline;
+}
+
+#tiddlerDisplay .tagging, #tiddlerDisplay .tagged{
+	background-color:#eee;
+	border:none;
+	float:none;
+}
+
+.sliderPanel .tabsetWrapper .tabContents{
+	border-right:none;
+	border-color:#999;
+	background-color:#999;
+}
+
+#sidebarOptions .sliderPanel a{
+	padding:3px;
+	margin:0px;
+	border:2px;
+	background-color:#999;
+}
+
+.tabsetWrapper{
+	position :relative;
+}
+
+#sidebar{
+	padding-left:0.5em;
+	background-color:#eee;
+	padding-top:1em;
+}
+
+#sidebarOptions a{
+	margin:17px;
+	display:block;
+	margin:0.5em 0em;
+	padding:0.3em 0.6em;
+}
+
+
+.popup li a {
+	margin:0px;
+	padding:0px;
+	display:inline;
+	color:black;
+}
+
+.popup {
+	background-color:white;
+	border:1px solid purple;
+}
+
+.popup li a:hover {
+	display:inline;
+	margin:0px;
+	padding:0px;
+	background-color:white;
+	color:purple;
+}
+
+.popup li {
+	margin:0px;
+	padding:5px;
+	background-color:#eee;
+}
+
+.popup li:hover {
+	background-color:white;
+}
+
+#tiddlerDisplay .toolbar a.button, #sidebarOptions a, .toolbar .popup li a, #mainMenu a, .tiddler .button, #sidebarOptions .sliderPanel input {
+	border:1px solid white;
+	background-color:white;
+	color:purple;
+}
+
+#tiddlerDisplay .toolbar a.button:hover, #sidebarOptions a:hover,  #mainMenu a:hover, .tiddler .button, #sidebarOptions .sliderPanel input:hover
+{
+	border:1px solid #ccc;
+}
+
+#sidebarOptions a:hover {
+border-right:1px solid white;
+}
+
+.tagged ul
+{
+	list-style: none;
+}
+
+.tagged li
+{
+	display: inline;
+}
+
+.zoomer {
+	background:none; color:#ddd;
+	border:2px solid #ddd;
+}
+
+a:active{
+border:1px solid red;
+	background-color:#eee;
+	color:[[ColorPalette::smmLight1]]
+}
+
+a:hover {
+	background-color:#eee;
+	color:[[ColorPalette::smmLight1]]
+}
+
+#backstageArea,#backstageArea a {
+	background:transparent;
+	color:white;
+}
+
+#mainMenu a{
+	padding:8px 15px 8px 15px;
+	margin:10px;
+line-height:40px;
+	border:1px solid #eee;
+}
+
+#contentWrapper #mainMenu{ 
+	position:static;
+	width:100%;
+	float:left;
+	text-align:left;
+	padding-top:20px;
+}
+
+.editor textarea, .editor input, input, body select {
+	border:1px solid #ccc;
+	background-color:white;
+	color:#999;
+	padding:3px;
+	margin:3px;
+}
+
+textarea {
+	height:20em;
+}
+
+#sidebarOptions input {
+	width:85%;
+	margin-left:-0.1em;}
+
+#sidebarTabs {
+	margin:0px;
+	padding:0px
+}
+
+#sidebarTabs .tabContents {
+	color:[[ColorPalette::smmLight1]];
+	background:#999;
+}
+
+#contentWrapper .tiddler .button {
+	margin:0.4em;
+	padding:0.4em 0.8em;
+}
+
+#sideBarOptions .searchButton{
+	display:none;
+}
+
+#sidebar .sliderPanel {
+	margin-left:5px;
+	border:0px;
+	padding:0em;
+	border-right:1px solid #eee;
+	margin-bottom:0.8em;
+}
+
+#sidebarOptions .searchButton {
+	display:none;
+}
+
+.title {
+	color:#C0C0C0;
+}
+
+.subtitle, .subtitle a {
+	color: #999;
+	font-size: 1em;margin:0.2em;
+	font-variant: small-caps;
+}
+
+* html .viewer pre {
+	margin-left: 0em;
+}
+
+* html .editor textarea, * html .editor input {
+	width: 98%;
+}
+
+a,#sidebarOptions .sliderPanel a, #topMenu a, #topMenu .button {
+	color:purple;
+	background-color:transparent;
+}
+
+#sidebarOptions .sliderPanel a:hover, #topMenu a, #topMenu .button:hover {
+	color:black;
+	background-color:transparent;
+	border:0px;
+}
+
+#sidebarOptions .sliderPanel a.tabSelected {
+border:1px solid #ddd;
+border-bottom:1px solid white;
+}
+
+#topMenu a, #topMenu .button {
+	padding: 5px 15px;
+	margin:9px;
+	border:1px solid #999;
+	font-weight:bold;
+	line-height:40px;
+	top:1em;
+	color:[[ColorPalette::smmLight1]];
+	background-color:#eee;
+}
+
+#topMenu br {
+	display:none;
+}
+
+#topMenu a:hover, #topMenu .button:hover {
+	background-color:#eee;
+}
+
+.tagging, .tagged {
+	border: 0px dotted [[ColorPalette::smmLight1]];
+}
+
+.highlight, .marked {
+	background:transparent;
+	color:#999; 
+	border:none; 
+	text-decoration:underline;
+}
+
+.tagging .button:hover, .tagged .button:hover, .tagging .button:active, .tagged .button:active {
+	border: none;
+	background:transparent;
+	text-decoration:underline;
+	color:#eee;
+}
+
+.viewer th, thead td {
+	background: #eee;
+	border:none;
+	color: #fff;
+}
+
+.viewer table {
+	border:1px solid #eee;
+}
+
+table.twtable {
+	border-collapse:seperate;
+}
+
+.viewer pre {
+	background-color:white;
+	border: 1px dotted #999;
+}
+
+hr {
+	border: dotted 1px #ccc;
+}
+
+#sidebarOptions .sliderPanel .tabUnselected {
+	background:#eee none repeat scroll 0%;
+	border:0px solid #999;
+	color:#999;
+	padding:2px;
+}
+
+#sidebarOptions .sliderPanel .tabSelected {
+	background:white none repeat scroll 0%;
+	padding:2px;
+	border:1px solid #999;
+	border-bottom:1px solid black;
+	color:#999;
+	border-bottom:2px solid white;
+}
+
+.tabContents {
+	background:#f7f7f7;
+	border:0px;
+}
+
+.viewer code {
+	background:##eee none repeat scroll 0%;
+	color:#999;
+}
+
+h1,h2,h3,h4,h5 {
+	color: #555; border-color:#333; background: transparent; padding-bottom:2px; font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+	font-size:18px;
+}
+
+h2 {
+	font-size:16px;
+	border-bottom:1px solid #FFF;
+}
+
+h3 {
+	font-size: 14px;
+	border-bottom:1px solid #FFF;
+}
+
+.annotation {
+	background-color:purple;
+	border:1px solid white;
+	color:white;
+}
+
+#contentFooter {
+	background:#999;
+	clear: both;
+	padding: 0.5em 1em;
+}
+
+.button, .wizard .button, .tiddler .button:hover{
+	border:1px solid #777;
+	padding:3px 9px;
+	margin:3px 9px;
+	background:#eee;
+	color:#777;
+}
+
+.button, .wizard .button:hover {
+	border:1px solid #999;
+	background:#eee;
+	color:#999;
+}
+
+.sliderPanel input  {
+	border:1px solid #777;
+	background-color:white;
+	color:#777;	
+}
+
+table, .viewer td, .viewer tr, .twtable td, .twtable tr {
+	border:0px solid #666666;
+}
+
+body .wizardFooter {
+	padding :10px;
+	margin:0px;
+	padding-top:0px;
+	background:white;
+	font-weight:bold;
+}
+
+.wizardStep {
+	padding:0px;
+	border:none;
+	background-color:none;
+} 
+	
+.wizard  th{
+	background:white;
+	color:#888;
+	padding:3px;
+	margin:40px;
+};
+
+.wizard, listView twtable {
+	border:0px; 
+};
+
+.wizard  {
+	color:#292929;
+}
+
+.viewer .wizard, body .wizard{
+	background:white;
+	margin:2em;
+	border:1px solid #CCCCCC;
+	color:#999;
+}
+
+.wizard h1{
+	color:#999;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+
+.wizard h2{
+	color:black;
+}
+
+body .wizardStep{
+	color:#999;
+	border:0px;
+	margin:0m;
+	background:white;	
+}
+
+body select {
+	border:0px;
+	padding:3px;
+	margin:4px;
+}
+
+#backstageArea a:hover {
+	background-color:white;
+}
+#backstagePanel {
+	background:none;
+	width:60%;
+	position:fixed
+	padding:0px;
+	margin:0px;
+	margin-top:-36px;
+}
+
+#backstageToolbar a.backstageSelTab{
+	background-color:white;
+	border:1px solid white;
+}
+
+#sidebar .sliderPanel {
+	background-color:#eee;
+	font-size:1em;
+}
+
+.viewer .wizardStep table {
+	border:0px;
+}
+
+.viewer th, .viewer td, .viewer tr, .viewer caption, .twtable th, .twtable td, .twtable tr, .twtable caption {
+	border:0px;
+	padding:0px;
+	margin:0px;
+}
+
+.viewer .sortable td  {
+	padding:12px;
+	margin:21px;
+}
+
+.title {
+	color:#777;
+	padding:0px;
+}
+
+.viewer table, table.twtable {
+border-collapse:seperated;
+border:0px;
+}
+
+.viewer th, .viewer thead td, .twtable th, .twtable thead td {
+	border:0px;
+	background-color:white;
+	color:black;
+}
+
+.twtable th{
+	background-color:#eee;
+	padding:15px;
+	margin:15px;
+}
+
+table.sortable td.sortedCol {
+	background-color:white;
+}
+/*}}}*/
+
+[[StyleSheet]]
+</pre>
+</div>

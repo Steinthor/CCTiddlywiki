@@ -1,0 +1,4 @@
+tags: ccTiddly  excludeSearch excludeLists
+
+|~ViewToolbar|closeTiddler closeOthers +editTiddler > fields syncing permalink revisions references jump|
+|~EditToolbar|+saveTiddler -cancelTiddler deleteTiddlerHosted|

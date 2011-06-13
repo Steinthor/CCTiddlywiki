@@ -1,0 +1,26 @@
+<div title="Help" modifier="ccTiddly" tags="ccTiddly excludeSearch excludeLists">
+<pre>
+~TiddlyWiki 是一个 html 文件，具备 wiki 的所有特性、功能 (包含编辑、保存、分类标签以及查找) 与样式。由于只是单一文件，因此极具可携性 - 可由电子邮件传送、放至网页主机，或置于随身碟分享。 ccTiddly 则提供 ~TiddlyWiki 一个服务端环境，让你可经由网路存取内容。
+
+此两者强大的合体，让你可与你的团队线上协同工作。在行程计划的任一工作段落，离线保存或修改一份副本。当再次连上互联网时，即可将修改过的版本与线上版本同步，若版本发生冲突也会提醒你。 
+
+工作区用途:
+
+	* 团队/ 公众 网页
+	* 部落格
+	* 个人笔记
+	* 时间管理 ("Getting Things Done") 
+	* 协同工作/讯息交流
+	* 团队工作管理
+	* 架站 (网站仅只是一个 TiddlyWiki 文件!)
+	* 快速创建雏型
+	* 还有更多...
+
+“控制台”的“导入”让你可以从不同来源导入资料，其他功能详细说明如下：
+<<slider cctHelpIntro [[ccTiddly Introduction]] "ccTiddly 简介 »" "ccTiddly 相关说明">>
+<<slider cctHelpFormatting [[TiddlyWiki Formatting Guide]] "Tiddly Wiki 标记语法说明 »" "TiddlyWiki 标记语法导引">>
+<<slider cctHelpccTiddlyMacros [[ccTiddly Macros]] "ccTiddly 宏 »" "ccTiddly 宏导引">>
+<<slider cctHelpTiddlyWikiMacros [[TiddlyWiki Macros]] "TiddlyWiki 宏 »" "TiddlyWiki 宏导引">>
+
+</pre>
+</div>

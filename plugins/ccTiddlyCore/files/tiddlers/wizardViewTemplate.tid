@@ -1,0 +1,5 @@
+tags: excludeLists excludeSearch
+
+<div class='toolbar' macro='toolbar closeTiddler closeOthers'></div>
+<div class='viewer' macro='view text wikified'></div>
+<div class='tagClear'></div>

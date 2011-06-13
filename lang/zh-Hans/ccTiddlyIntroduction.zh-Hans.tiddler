@@ -1,0 +1,27 @@
+<div title="ccTiddly Introduction" modifier="ccTiddly" tags="ccTiddly excludeSearch excludeLists ">
+<pre>
+(这些内容仍在编写中 ...)
+
+!!!ccTiddly Tiddlers 
+
+[[AnonDefaultTiddlers]]
+
+允许载入不同的 tiddlers，让造访的访客检视此指定的 tiddlers 组成的默认首页，登入的用户则会看到指定于 [[DefaultTiddlers]] 的默认首页内容。
+
+[[ccAssignments]]
+
+
+
+!!! ccTiddly 默认标签 
+
+!!!!wizard
+显示 tiddler 时，隐藏其更新日期、作者、标签、标题等资讯。
+
+!!!!private
+只有工作区的观礼者可以检视标签设为 private 的 tiddlers。
+
+
+!!! Working Offline : 
+
+</pre>
+</div>

@@ -1,0 +1,52 @@
+8
+
+dir
+12270
+http://svn.tiddlywiki.org/Trunk/association/serversides/cctiddly/Trunk/lang/en
+http://svn.tiddlywiki.org
+
+
+
+2010-01-12T10:50:49.630141Z
+11422
+simonmcmanus
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+bb0f57cd-c710-0410-a8fb-e8bc1be0d679
+
+language.php
+file
+
+
+
+
+2009-08-21T10:21:03.000000Z
+eb1331f7330c65889fa19ebf4a785f50
+2008-10-27T16:39:59.252977Z
+7406
+simonmcmanus
+
+003_ccLingo.js
+file
+
+
+
+
+2010-01-12T10:48:25.000000Z
+f7838942c5f3d2b014c5487bccfd270f
+2010-01-12T10:50:49.630141Z
+11422
+simonmcmanus
+

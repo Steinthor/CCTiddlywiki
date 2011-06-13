@@ -1,0 +1,6 @@
+#turn on rewrite engine
+RewriteEngine On
+#rewrite if request path is not a directory
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule (.*)/?$ index.php?workspace=$1&%{QUERY_STRING}	[L]
