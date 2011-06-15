@@ -1,5 +1,4 @@
 <?php
-
 class Plugin {
 	public $phpEvents;
 	public $tiddlers;
@@ -31,8 +30,8 @@ class Plugin {
 	
 	function tiddlerFromFile($file) {
 //		echo $file;
-		$tiddler['created'] = epochToTiddlyTime(mktime());
-		$tiddler['modified'] = epochToTiddlyTime(mktime());
+		$tiddler['created'] = epochToTiddlyTime(time());
+		$tiddler['modified'] = epochToTiddlyTime(time());
 		$tiddler['modifier'] = "ccTiddly";
 		$tiddler['creator'] = "ccTiddly";
 		$ext = substr($file, strrpos($file, '.') + 1);
@@ -47,7 +46,7 @@ class Plugin {
 			$tiddler = tiddler_parse_tid_file($file);
 //			print_r($tiddler);
 		}
-		$tiddler['tags'] .= $tiddlyCfg['plugins_tags'];	
+		if(isset($tiddlyCfg['plugins_tags'])) $tiddler['tags'] .= $tiddlyCfg['plugins_tags'];	
 		return $tiddler;
 	}
 	

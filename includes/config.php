@@ -6,7 +6,7 @@ $tiddlyCfg['db']['host'] = "127.0.0.1";		//sql host
 $tiddlyCfg['db']['login'] = "root";		//login name
 
 $tiddlyCfg['db']['pass'] = "";		//login password
-$tiddlyCfg['db']['name'] = "two";		//db name 
+$tiddlyCfg['db']['name'] = "cct";		//db name 
 $tiddlyCfg['db']['port'] = "3306"; // db port 
 $tiddlyCfg['db']['allow_override'] = true;
 
@@ -211,22 +211,22 @@ if (isset($_REQUEST["standalone"]) && $_REQUEST["standalone"]==1)
 $tiddlyCfg['pref']['base_folder'] = getBaseDir($_SERVER);
 $tiddlyCfg['pref']['upload_dir'] = $_SERVER['DOCUMENT_ROOT'].$tiddlyCfg['pref']['base_folder'].'uploads/';  // location of the file upload directory - assumes is it under the root folder 
 
-if($_REQUEST['db'])
+if(isset($_REQUEST['db']))
 	$alternative_db = $_REQUEST['db'];
-if($_POST['db'])
+if(isset($_POST['db']))
 	$alternative_db = $_POST['db'];
-if($_REQUEST['translation'])
+if(isset($_REQUEST['translation']))
 	$alternative_db = $_REQUEST['translation'];
-if($_POST['translation'])
+if(isset($_POST['translation']))
 	$alternative_db = $_POST['translation'];
 
-if($tiddlyCfg['db']['allow_override'] && $alternative_db)
+if($tiddlyCfg['db']['allow_override'] && isset($alternative_db))
 {
 	$alternative_db = str_replace("-", "", $alternative_db);
 	$tiddlyCfg['db']['name'] = $tiddlyCfg['db']['name']."_".$alternative_db;
 }
 
-if($_REQUEST['translation'])
+if(isset($_REQUEST['translation']))
 	$tiddlyCfg['pref']['language'] = $_REQUEST['translation'];
 
 

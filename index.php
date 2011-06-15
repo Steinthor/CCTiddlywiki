@@ -53,7 +53,7 @@ if( isset($_GET['title']) )
 		$t[] = $tid;
 	}
 	$tiddlers = $t;
-}elseif($_GET['tiddler'])
+}elseif(isset($_GET['tiddler']))
 {
 	$defeaultTiddlersTiddler['title'] = 'DefaultTiddlers';
 	$defeaultTiddlersTiddler['body'] = $_GET['tiddler']; 
@@ -83,7 +83,7 @@ recordTime_float("get all tiddlers");
 $data1['username'] = $user['username'];
 $data1['workspace'] = $tiddlyCfg['workspace_name'];
 
-$data1['time'] = date( 'Y-m-d H:i:s', mktime());
+$data1['time'] = date( 'Y-m-d H:i:s', time());
 db_record_insert($tiddlyCfg['table']['workspace_view'],$data1);
 
 
@@ -132,7 +132,10 @@ DAMAGE.
 <!--PRE-HEAD-START-->
 <!--{{{-->
 <?php
-print tiddler_bodyDecode($tiddlers['MarkupPreHead']['body']);
+if(isset($tiddlers['MarkupPreHead']['body']))
+{
+	print tiddler_bodyDecode($tiddlers['MarkupPreHead']['body']);
+}
 ?>
 <!--}}}-->
 <!--PRE-HEAD-END-->

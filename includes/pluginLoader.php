@@ -1,6 +1,5 @@
 <?php
-
-if ($_REQUEST["standalone"]!=1) 
+if(!isset($_REQUEST["standalone"]))
 {
 	include('pluginsLoaderClass.php');
 	global $pluginsLoader;

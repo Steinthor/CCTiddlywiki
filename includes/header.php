@@ -13,7 +13,7 @@ include_once($cct_base."lang/".$tiddlyCfg['pref']['language']."/language.php");
 //include is used because language file is included once in config.php file
 include_once($cct_base."includes/tiddler.php");
 
-if($pluginsLoader->events['preUserInclude'])
+if(isset($pluginsLoader->events['preUserInclude']))
 {
 	foreach ($pluginsLoader->events['preUserInclude'] as $event)
 	{

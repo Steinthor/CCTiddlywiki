@@ -32,13 +32,16 @@ function checkAndAddSlash($uri)
 function getWorkspaceName($_SERVER, $_REQUEST)
 {
 	global $tiddlyCfg;
-	if(substr($_REQUEST['workspace'], strlen($_REQUEST['workspace'])-1, strlen($_REQUEST['workspace']))=="/")
+	if (isset($_REQUEST['workspace']))
 	{
-		$str =  substr($_REQUEST['workspace'], 0,  $_REQUEST['workspace']-1);
-	} else {
-		$str =  $_REQUEST['workspace'];
-	}
-	return $str;
+		if(substr($_REQUEST['workspace'], strlen($_REQUEST['workspace'])-1, strlen($_REQUEST['workspace']))=="/")
+		{
+			$str =  substr($_REQUEST['workspace'], 0,  $_REQUEST['workspace']-1);
+		} else {
+			$str =  $_REQUEST['workspace'];
+		}
+		return $str;
+	} else return "";
 }
 
 function getBaseDir($_SERVER)
