@@ -91,6 +91,7 @@
 				if($results[0]['expire'] > epochToTiddlyTime(time())) 
 				{
 					if($tiddlyCfg['pref']['renew_session_on_each_request']==1)
+						$un = user_getUsername();
 						user_reset_session($un, $pw);
 					return TRUE;
 				}
@@ -117,7 +118,8 @@
 	function user_set_session($un, $pw)
 	{
 		global $tiddlyCfg;
-		debug($ccT_msg['debug']['setSession'], "login");
+		if(isset($ccT_msg['debug']['setSession']))
+			debug($ccT_msg['debug']['setSession'], "login");
 		if ($tiddlyCfg['users_required_in_db']==1)
 		{
 			debug($ccT_msg['debug']['userRequiredInDb'], "login");
@@ -140,8 +142,9 @@
 		// create a date far in the future if session timeout is set to 0
 		$a = time();
 		$total = $a+$tiddlyCfg['session_expire'];	
-		$insert_data['expire'] = epochToTiddlyTime($total); // add expire time to data array for insert		
-		debug($ccT_msg['debug']['sessionWillExpire'].$insert_data['expire'], "login");	
+		$insert_data['expire'] = epochToTiddlyTime($total); // add expire time to data array for insert	
+		if(isset($ccT_msg['debug']['sessionWillExpire']))
+			debug($ccT_msg['debug']['sessionWillExpire'].$insert_data['expire'], "login");	
 		$insert_data['ip'] = $_SERVER['REMOTE_ADDR'];  // get the ip address
 		$insert_data['session_token'] = sha1($un.$_SERVER['REMOTE_ADDR'].$expire); // colect data together and sh1 it so that we have a unique indentifier 
 		if ($tiddlyCfg['pref']['delete_other_sessions_on_login']) {
@@ -152,7 +155,8 @@
  		cookie_set('sessionToken', $insert_data['session_token']);
 		$rs = db_record_insert('login_session',$insert_data);
 		if ($rs){
-			debug($ccT_msg['debug']['sessionAddedToDb'], "login");
+			if(isset($ccT_msg['debug']['sessionAddedToDb']))
+				debug($ccT_msg['debug']['sessionAddedToDb'], "login");
 			return $insert_data['session_token'];
 		}	
 	}		
@@ -168,13 +172,16 @@
 		debug("validating the session with Username/pass:  ".$un, "steps");
 			
 		// session has not been created, lets try the user/pass on our ldap server. 
-		if ($tiddlyCfg['pref']['ldap_enabled']==1)
+		if(isset($tiddlyCfg['pref']['ldap_enabled']))
 		{
-			if (user_ldap_login($un, $pw))	
+			if ($tiddlyCfg['pref']['ldap_enabled']==1)
 			{
-				return TRUE;
+				if (user_ldap_login($un, $pw))	
+				{
+					return TRUE;
+				}
 			}
-		}		
+		}
 		
 		if ($un != '' && $pw != '')
 		{

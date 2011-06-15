@@ -110,7 +110,7 @@ if ($user['verified'] && user_isAdmin($user['username'], $tiddlyCfg['workspace_n
 	echo "workspacePermission.upload = 1;";
 }
 
-if ($user['verified'] && $_REQUEST['standalone']!=1)
+if ($user['verified'] && !isset($_REQUEST['standalone']))
 {
 ?>
 window.loggedIn ="1";
