@@ -258,9 +258,6 @@ config.commands.deleteTiddlerHosted.callback = function(context,userParams)
 			context.status = false;
 		}else{
 			context.status = true;
-			var c='sessionToken'+"="+responseText;
-				c+="; expires=Fri, 1 Jan 2811 12:00:00 UTC; host=*";
-				document.cookie=c;
 		}
 		if(context.callback)
 			context.callback(context,context.userParams);
