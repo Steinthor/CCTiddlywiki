@@ -459,7 +459,7 @@
 		foreach($fields as $field)
 		{
 			$pairs = explode(":", $field);
-			$tiddler[$pairs[0]] = trim($pairs[1]);
+			if(isset($pairs[0]) && isset($pairs[1])) $tiddler[$pairs[0]] = trim($pairs[1]);
 		}
 		return $tiddler;
 	}
