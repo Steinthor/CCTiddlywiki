@@ -43,8 +43,10 @@ if (isset($_POST['logout']) || isset($_REQUEST['logout']))
 	user_logout('You have logged out.');
 	if($tiddlyCfg['use_mod_rewrite']==0)
 		header('Location:'.getURL().$base.'?workspace='.$_REQUEST['workspace']);
-	else
+	else if(isset($_REQUEST['workspace']))
 		header('Location:'.getURL().$base.$_REQUEST['workspace']);
+	else
+		header('Location:'.getURL().$base);
 }
 ///////////////////////////////CC: user variable defined in header and $user['verified'] can be used directly to check user validation
  // check to see if user is logged in or not and then assign permissions accordingly. 
