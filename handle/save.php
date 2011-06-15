@@ -41,13 +41,17 @@ if(@$pluginsLoader->events['preSave']) {
 // does the tiddler already exists?
 if(db_tiddlers_mainSelectTitle($ntiddler['title']) || is_numeric($_POST['id']))
 {	
-	
-	if($tiddler['revision'] !== $_POST['revision']) {		//ask to reload if the tiddler has been edited it was last downloaded
-		debug($ccT_msg['debug']['reloadRequired'], "save");
-		sendHeader(409);
-		exit;
+	if(isset($tiddler['revision']))
+	{
+		if($tiddler['revision'] !== $_POST['revision']) {		//ask to reload if the tiddler has been edited it was last downloaded
+			debug($ccT_msg['debug']['reloadRequired'], "save");
+			sendHeader(409);
+			exit;
+		}
 	}
 
+	if(isset($tiddler['title']))
+	{
 	if($ntiddler['title']!=$tiddler['title']) // The Tiddler is being renamed.THIS MAY BE REDUNDANT. 
 	{		
 		if(@$pluginsLoader->events['preRename']) 
@@ -64,8 +68,9 @@ if(db_tiddlers_mainSelectTitle($ntiddler['title']) || is_numeric($_POST['id']))
 
 		if(user_editPrivilege(user_tiddlerPrivilegeOfUser($user,$tiddler['tags'])))
 		{
-			
+			if(isset($otiddler['creator']))
 				$ntiddler['creator'] = $otiddler['creator'];
+			if(isset($otiddler['created']))
 				$ntiddler['created'] = $otiddler['created'];
 				$ntiddler['revision'] = $otiddler['revision']+1;
 				debug("Attempting to update server for tiddler...");
@@ -77,15 +82,21 @@ if(db_tiddlers_mainSelectTitle($ntiddler['title']) || is_numeric($_POST['id']))
 		exit;
 
 	}
+	}
 // end rename
 
 
-		//require edit privilege on new and old tags			
+	//require edit privilege on new and old tags
+	if(!isset($otiddler['tags']))
+		$otiddler['tags'] = "";
 	if(user_editPrivilege(user_tiddlerPrivilegeOfUser($user,$ntiddler['tags'])) && user_editPrivilege(user_tiddlerPrivilegeOfUser($user,$otiddler['tags'])))
 	{
-		$ntiddler['creator'] = $otiddler['creator'];
-		$ntiddler['created'] = $otiddler['created'];
-		$ntiddler['revision'] = $otiddler['revision']+1;
+		if(isset($otiddler['creator']))
+			$ntiddler['creator'] = $otiddler['creator'];
+		if(isset($otiddler['created']))
+			$ntiddler['created'] = $otiddler['created'];
+		if(isset($otiddler['revision']))
+			$ntiddler['revision'] = $otiddler['revision']+1;
 		debug("Attempting to update server for tiddler...");
 		unset($ntiddler['workspace_name']); 	// hack to remove the workspace being set twice. 
 		if(tiddler_update_new($tiddler['id'], $ntiddler)) {
