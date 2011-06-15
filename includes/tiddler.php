@@ -70,7 +70,8 @@
 	function tiddler_backup_create($tiddler_create, $oid="")
 	{
 		$tiddler = array();
-		$tiddler['id'] = preg_replace("![^0-9]!","",$tiddler_create['id']);		//if empty, leave it as empty. otherwise make it as int
+		if(isset($tiddler_create['id']))
+			$tiddler['id'] = preg_replace("![^0-9]!","",$tiddler_create['id']);		//if empty, leave it as empty. otherwise make it as int
 		$tiddler['tiddler_id'] = preg_replace("![^0-9]!","",$oid);
 		$tiddler['title'] = $tiddler_create['title'];
 		$tiddler['body'] = $tiddler_create['body'];

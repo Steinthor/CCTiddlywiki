@@ -371,7 +371,7 @@ function db_tiddlers_mainInsert($tiddler,$stop=1)
 	global $tiddlyCfg;
 	while((list($k,$v) = each($tiddler)))
 	{
-		$q .= "`".db_format4SQL($k).'`="'.db_format4SQL($v).'",';
+		$q = "`".db_format4SQL($k).'`="'.db_format4SQL($v).'",';
 		if(strcmp($k,"id")!=0) 
 		{
 			$key[] = $k;
@@ -398,7 +398,7 @@ function db_tiddlers_backupInsert($tiddler,$stop=1)
 	global $tiddlyCfg;
 	while((list($k,$v) = each($tiddler)))
 	{
-		$q .= "`".db_format4SQL($k)."`='".db_format4SQL($v)."',";
+		$q = "`".db_format4SQL($k)."`='".db_format4SQL($v)."',";
 		if(strcmp($k,"id")!=0) 
 		{
 			$key[] = $k;

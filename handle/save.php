@@ -1,5 +1,5 @@
 <?php
-error_log("save request has been saved");
+//error_log("save request has been saved");
 $cct_base = "../";
 include_once($cct_base."includes/header.php");
 debug($_SERVER['PHP_SELF'], "handle");	
@@ -21,7 +21,8 @@ $otiddler['revision'] = formatParametersPOST($_POST['revision']);
 $ntiddler['title'] = formatParametersPOST($_POST['title']);
 $ntiddler['modifier'] = formatParametersPOST($_POST['modifier']);
 $ntiddler['modified'] = formatParametersPOST($_POST['modified']);
-$ntiddler['created'] = formatParametersPOST($_POST['created']); 
+if(isset($_POST['created']))
+	$ntiddler['created'] = formatParametersPOST($_POST['created']); 
 $ntiddler['tags'] = formatParametersPOST($_POST['tags']);
 $ntiddler['body'] =  formatParametersPOST($_POST['body']);
 $ntiddler['fields'] = formatParametersPOST($_POST['fields']);
