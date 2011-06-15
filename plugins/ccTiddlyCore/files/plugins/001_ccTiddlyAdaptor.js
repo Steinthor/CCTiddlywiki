@@ -247,9 +247,9 @@ config.commands.deleteTiddlerHosted.callback = function(context,userParams)
 		else
 			var uriParams = "";
 		context = this.setContext(context,userParams,callback);
-		var uriTemplate = '%0/handle/loginFile.php?cctuser=%1&cctpass=%2&'+uriParams;
+		var uriTemplate = '%0/handle/loginFile.php?'+uriParams;
 		var uri = uriTemplate.format([context.host,context.username,context.password]);
-		var req = httpReq('GET',uri,ccTiddlyAdaptor.loginCallback,context);
+		httpReq('POST',uri,ccTiddlyAdaptor.loginCallback,context,null,"cctuser="+context.username+"&cctpass="+context.password); 
 		return typeof req == 'string' ? req : true;
 	};
 
