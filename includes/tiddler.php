@@ -216,16 +216,34 @@
 			$server = dirname(getURL());
 		else
 			$server = getURL();
-			
-		if(is_array($tiddler["tags"]))
-			$tiddler["tags"] = implode(" ", $tiddler["tags"]);
-		if($tiddler["id"])
+		if(isset($tiddler["tags"]))
+		{
+			if(is_array($tiddler["tags"]))
+				$tiddler["tags"] = implode(" ", $tiddler["tags"]);
+		}
+		if(isset($tiddler["id"]))
 			$id = "server.id='".$tiddler["id"]."'";
 		else
 			$id = ""; // must be a system tiddler
 
-		echo "<div title=\"".$tiddler["title"]."\" modifier='".$tiddler["modifier"]."' modified='".$tiddler["modified"]."' created='".$tiddler["created"]."' tags='".$tiddler["tags"]."' server.page.revision='".$tiddler["revision"]."' server.host='".$server."' server.type='cctiddly'  server.workspace='".$tiddlyCfg['workspace_name']."' ".$tiddler["fields"]." ".$id.">\r\n<pre>".htmlspecialchars($tiddler['body'])."</pre>\r\n</div>\n\r";	
-
+		//echo "<div title=\"".$tiddler["title"]."\" modifier='".$tiddler["modifier"]."' modified='".$tiddler["modified"]."' created='".$tiddler["created"]."' tags='".$tiddler["tags"]."' server.page.revision='".$tiddler["revision"]."' server.host='".$server."' server.type='cctiddly'  server.workspace='".$tiddlyCfg['workspace_name']."' ".$tiddler["fields"]." ".$id.">\r\n<pre>".htmlspecialchars($tiddler['body'])."</pre>\r\n</div>\n\r";
+		$str = "<div title=\"".$tiddler["title"]."\" modifier='";
+		if(isset($tiddler["modifier"])) $str .= $tiddler["modifier"]."' modified='";
+			else $str .= "' modified='";
+		if(isset($tiddler["modified"])) $str .= $tiddler["modified"]."' created='";
+			else $str .= "' created='";
+		if(isset($tiddler["created"])) $str .= $tiddler["created"]."' tags='";
+			else $str .= "' tags='";
+		if(isset($tiddler["tags"])) $str .= $tiddler["tags"]."' server.page.revision='";
+			else $str .= "' server.page.revision='";
+		if(isset($tiddler["revision"])) $str .= $tiddler["revision"]."' server.host='".$server."' server.type='cctiddly'  server.workspace='".$tiddlyCfg['workspace_name']."' ";
+			else $str .= "' server.host='".$server."' server.type='cctiddly'  server.workspace='".$tiddlyCfg['workspace_name']."' ";
+		if(isset($tiddler["fields"])) $str .= $tiddler["fields"]." ".$id.">\r\n<pre>";
+			else $str .= " ".$id.">\r\n<pre>";
+		if(isset($tiddler['body'])) $str .= htmlspecialchars($tiddler['body'])."</pre>\r\n</div>\n\r";
+			else $str .= "</pre>\r\n</div>\n\r";
+		echo $str;
+		
 	return;
 	}
 	

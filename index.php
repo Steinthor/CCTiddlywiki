@@ -191,7 +191,7 @@ This page requires JavaScript to function properly.<br /><br />If you are using 
 <div title="MarkupPreHead">
 <pre>
 <?php
-print tiddler_bodyDecode($tiddlers['MarkupPreHead']['body']);
+if(isset($tiddlers['MarkupPreHead']['body'])) print tiddler_bodyDecode($tiddlers['MarkupPreHead']['body']);
 ?>
 </pre>
 </div>

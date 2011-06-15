@@ -22,7 +22,7 @@ if( sizeof($tiddlers)>0 )
 {
 	foreach($tiddlers as $t)
 	{
-		if($pluginsLoader->events['preOutputTiddler']) 
+		if(isset($pluginsLoader->events['preOutputTiddler']) )
 		{
 			foreach ($pluginsLoader->events['preOutputTiddler'] as $event)
 			{
