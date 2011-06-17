@@ -72,7 +72,7 @@ if (!$status) {
 	if (strlen($err) > 0)
 	echo "<h4>$err</h4>";
 } else {
-	$url = dirname(getUrl())."/uploads/workspace/".$w."/".$_FILES["userFile"]["name"];
+	$url = dirname(getUrl())."/uploads/".$w."/".$_FILES["userFile"]["name"];
 	if($file_type == 'image') 
 	{
 		$output .= '<h2>'.$ccT_msg['upload']['uploadedTitle'].'</h2> ';
