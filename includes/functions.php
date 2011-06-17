@@ -76,7 +76,7 @@ function getAdminsOfWorkspace($workspace)
 	$i = 0;
 	foreach($results as $result)
 		$admin_array[$i++] = $result['username'];
-	if(is_array($admin_array))
+	if(isset($admin_array))
 		return $admin_array;
 	else
 		return array();

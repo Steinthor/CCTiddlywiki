@@ -23,7 +23,7 @@ if ($tiddlyCfg['workspace_name'] == "")
 	$w = "default";
 else
 	$w = $tiddlyCfg['workspace_name'];
-$folder = $tiddlyCfg['pref']['upload_dir']."workspace/".$w;
+$folder = $tiddlyCfg['pref']['upload_dir'].$w;
 
 
 if(!file_exists($folder))
@@ -73,6 +73,7 @@ if (!$status) {
 	echo "<h4>$err</h4>";
 } else {
 	$url = dirname(getUrl())."/uploads/".$w."/".$_FILES["userFile"]["name"];
+	$output = "";
 	if($file_type == 'image') 
 	{
 		$output .= '<h2>'.$ccT_msg['upload']['uploadedTitle'].'</h2> ';
