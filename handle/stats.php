@@ -15,7 +15,7 @@ if (!user_isAdmin(user_getUsername(), $w)){
 function gaps($start, $interval){
 	$gaps[] = $start;
 	$temp=$start;
-	while($temp < mktime()){
+	while($temp < time()){
 		$temp = $temp + $interval;
 		$gaps[] = $temp;
   	}
@@ -25,11 +25,12 @@ function gaps($start, $interval){
 function handleSQL($SQL, $format, $goBack, $interval){
 	$results = mysql_query($SQL);
 	$count = 0;
+	$dates[] = array();
 	while($result=mysql_fetch_assoc($results)){
 			$dates[] .= $result['Date'];
 			$hits[$result['Date']] = $result['numRows'];
 	}
-	$a = gaps(mktime()-$goBack, $interval);
+	$a = gaps(time()-$goBack, $interval);
 	foreach ($a as $time){
 		if(!@in_array(date($format, $time), $dates)){
 			$hits[date($format, $time)] = 0;
@@ -37,8 +38,9 @@ function handleSQL($SQL, $format, $goBack, $interval){
 		}
 	}
 	sort($dates);
+	$str = "";
 	foreach($dates as $date){
-		if($date!="")
+		if(!is_array($date))
 			$str .= "{ date:'".$date."', hits:".$hits[$date]." },";	
 	}
 	return substr($str,0,strlen($str)-1);	

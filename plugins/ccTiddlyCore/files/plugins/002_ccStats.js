@@ -45,9 +45,9 @@ config.macros.ccStats.dataCallback = function(status,params,responseText,uri,xhr
 	}
 	var maxValue = config.macros.ccStats.max(d);
  	params.gData = config.macros.ccStats.simpleEncode(d,maxValue);
-	params.XLabel = l.substring(0, l.length -1);
-	params.YLabel = "0|"+maxValue+"|";
-	var image = 'http://chart.apis.google.com/chart?cht=lc&chs=100x75&chd='+params.gData+'&chxt=x,y&chxl=0:||1:|';
+	params.XLabel = res.length-1; //l.substring(0, l.length -1);
+	params.YLabel = maxValue;
+	var image = 'http://chart.apis.google.com/chart?cht=lc&chs=100x75&chd='+params.gData+'&chxt=x,y&chxl=0:|0|'+params.XLabel+'|1:|0|'+params.YLabel;
 	var div = createTiddlyElement(params.container, "div", null, "div_button");
 	setStylesheet(".div_button:hover{opacity:0.7; cursor: pointer} .div_button{ width:100%; padding:5px;color:#555;background-color:white;} ", "DivButton");
 	div.onclick = function(){
