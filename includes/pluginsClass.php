@@ -41,7 +41,7 @@ class Plugin {
 			$tiddler['tags'] = "";
 		} elseif($ext=='js') {
 			$tiddler['body'] = file_get_contents($file);	
-			$tiddler['tags'] = "systemConfig";
+			$tiddler['tags'] = "systemConfig excludeLists";
 		} elseif($ext=='tid') {
 			$tiddler = tiddler_parse_tid_file($file);
 //			print_r($tiddler);
