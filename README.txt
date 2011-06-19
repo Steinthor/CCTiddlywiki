@@ -1,5 +1,4 @@
-Welcome to ccTiddly 1.8
-
+Welcome to ccTiddly 1.9.1
 
 For information on the latest release please see the following sites : 
 * http://www.tiddlywiki.org/wiki/CcTiddly/Releases
