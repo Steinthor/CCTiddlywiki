@@ -238,7 +238,6 @@
 		$userGrab = strpos($t, "txtUserName")+13;
 		$userEnd = strpos($t, '"', $userGrab)-$userGrab;
 		$u = substr($t, $userGrab, $userEnd);
-		//$u = cookie_get('txtUserName');
 		if( strlen($u)==0 )
 		{
 			return "YourName";
