@@ -234,7 +234,11 @@
 	//!	@brief get username from cookie
 	function user_getUsername()
 	{
-		$u = cookie_get('txtUserName');
+		$t = cookie_get('TiddlyWiki');
+		$userGrab = strpos($t, "txtUserName")+13;
+		$userEnd = strpos($t, '"', $userGrab)-$userGrab;
+		$u = substr($t, $userGrab, $userEnd);
+		//$u = cookie_get('txtUserName');
 		if( strlen($u)==0 )
 		{
 			return "YourName";
