@@ -347,7 +347,7 @@ function db_tiddlers_mainSelectTitle($title)
 				return $t;
 		}
 	} else
-		return "no";
+		return FALSE;
 	
 }
 

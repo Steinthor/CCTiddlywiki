@@ -5,7 +5,7 @@ include_once($cct_base."includes/header.php");
 debug($_SERVER['PHP_SELF'], "handle");	
 
 $tiddler = db_tiddlers_mainSelectTitle($_REQUEST['title']);
-if( $tiddler = "no" ) {//not found
+if( $tiddler == FALSE ) {//not found
 	sendHeader(204);
 	return;
 } else
