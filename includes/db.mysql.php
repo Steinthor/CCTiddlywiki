@@ -335,15 +335,20 @@ function db_tiddlers_mainSelectTitle($title)
 		."' AND title='".db_format4SQL($title)."'";
 	debug("db_tiddlers_mainSelectTitle: ".$q, "mysql");
 	$result = mysql_query($q) or die(mysql_error());
+	$numRows = mysql_num_rows($result);
 	//grab record and check if title are the same
 	//this is required since mysql is not binary safe unless deliberately configured in table
 	//result would be empty string if not found, array if found
-	while($t = mysql_fetch_assoc($result))
+	if($numRows != 0)
 	{
-		if(strcmp($t['title'],$title)==0)
-			return $t;
-	}
-	return FALSE;
+		while($t = mysql_fetch_assoc($result))
+		{
+			if(strcmp($t['title'],$title)==0)
+				return $t;
+		}
+	} else
+		return "no";
+	
 }
 
 function db_tiddlers_backupSelectOid($oid)
