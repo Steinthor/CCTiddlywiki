@@ -18,8 +18,8 @@ $tiddlyCfg['plugins_disabled'] = array(
 	"OpenID",
 	"themes",	
 	"seo",
-	"SkinnyTiddlers",
-	"static"
+	"SkinnyTiddlers"
+	"ckeditor" //to enable the plugin fully, check the README.txt in the "plugins/ckeditor" folder.
 );
 
 
