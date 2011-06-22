@@ -28,7 +28,6 @@ $tiddler_list = db_tiddlers_backupSelectOid($tiddler['id']);
 foreach( $tiddler_list as $t ) {
 	if( $revision == $t['revision'] ) {		//if revision equals, check privilege
 		if( user_readPrivilege(user_tiddlerPrivilegeOfUser($user,$t['tags'])) ) {	//if read privilege ok, output	
-			//echo '{"created":"'.$t['created'].'", "text":"'.tiddler_bodyEncode($t['body']).'", "tags":"'.$t['tags'].'", "modified":"'.$t['modified'].'", "modifier":"'.$t['modifier'].'", "revision":'.$t['revision'].'}';
 
 			$result = '{"created":"';
 			if(isset($t['created']))
