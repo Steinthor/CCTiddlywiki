@@ -169,13 +169,100 @@ config.commands.revisions.getTiddlerRevision = function(title,modified,revision)
 config.commands.revisions.getTiddlerRevisionCallback = function(context,userParams)
 {
 	if(context.status) {
-		var tiddler = context.tiddler;
-		store.addTiddler(tiddler);
-		store.notify(tiddler.title, true);
-		story.refreshTiddler(tiddler.title,1,true);
+		//var tiddler = context.tiddler;
+		var tiddler = config.commands.revisions.compareTiddler(context.tiddler);
+		if(tiddler != "FALSE")
+		{
+			tiddler.title = "*Revision - "+tiddler.title+" - Revision*";
+			tiddler.tags="wizard".readBracketedList();
+			store.addTiddler(tiddler);
+			store.notify(tiddler.title, true);
+			story.displayTiddler(null,tiddler.title);
+			story.refreshTiddler(tiddler.title,1,true);
+			}
 	} else {
 		displayMessage(context.statusText);
 	}
+};
+
+config.commands.revisions.compareTiddler = function (tiddler)
+{
+	var n = store.getTiddlerText(tiddler.title);
+	var o = tiddler.text;
+	
+			if (o==n) return "FALSE"; // simple check, saves time if true
+		
+		oldArray = o.split("");
+		newArray = n.split("");
+		var strArray1 = new Array();
+		var strArray2 = new Array();
+		newStart = 0;
+		textMatch = n.search(o.match(/\w+/i));
+		strArray1.push(n.slice(newStart,textMatch));
+		strArray2.push("add");
+		if (textMatch > 0) newStart = textMatch;
+
+		for (i=0; i < oldArray.length; i++)
+		{
+			if (newArray[newStart] == oldArray[i]) 
+			{
+				strArray1.push(oldArray[i]);
+				strArray2.push("same");	
+				newStart++;		
+				continue;
+			}
+			if (newArray[newStart] != oldArray[i])
+			{
+				var patt1 = /\w+/i;
+				var patt2 = /\w+/ig;
+				oldword = o.slice(i,o.length).match(patt1);  //orð í gamla sem finnst ekki í nýja
+				patt2.test(o.slice(i,o.length));
+				// kominn með staðsetningu eftir gamla orðið (i+patt2.lastIndex)
+
+				oldWordText = o.slice(i+patt2.lastIndex,o.length).match(patt2);
+				newWordText = n.slice(newStart,n.length).match(patt2);
+				//kominn með arrays af orðum eftir orðið sem var ekki í orginal texta.
+				if (!oldWordText) break;
+
+				for (j=0; j<oldWordText.length; j++)
+				{
+					findOldInNew =  n.slice(newStart,n.length).search(oldWordText[j]);
+					findOldInOld = o.slice(i,o.length).search(oldWordText[j]);
+					if (findOldInNew == -1) continue;
+					if (findOldInNew != -1)
+					{
+						strArray1.push(n.slice(newStart,newStart+findOldInNew));
+						strArray2.push("add");
+						newStart = newStart+findOldInNew;
+						i = i+findOldInOld-1;
+						break;
+					}					
+				}
+				patt2.lastIndex = 0;
+			}
+		}
+		if (newStart < n.length) 
+		{
+			strArray1.push(n.slice(newStart,n.length));
+			strArray2.push("add");
+		}
+		var str = "";
+		for (i=0; i<strArray2.length; i++) 
+		{
+			switch (strArray2[i]) 
+			{
+				case "add":
+					str+="@@background-color:#66CC33;";
+					str+=strArray1[i];
+					str+="@@";
+					break;
+				default:
+					str+=strArray1[i];
+					break;
+			}	
+		}
+        tiddler.text=str;
+		return tiddler;	
 };
 
 config.commands.deleteTiddlerHosted.handler = function(event,src,title)
