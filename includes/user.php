@@ -235,14 +235,18 @@
 	function user_getUsername()
 	{
 		$t = cookie_get('TiddlyWiki');
-		$userGrab = strpos($t, "txtUserName")+13;
-		$userEnd = strpos($t, '"', $userGrab)-$userGrab;
-		$u = substr($t, $userGrab, $userEnd);
-		if( strlen($u)==0 )
+		if($t)
 		{
+			$userGrab = strpos($t, "txtUserName")+13;
+			$userEnd = strpos($t, '"', $userGrab)-$userGrab;
+			$u = substr($t, $userGrab, $userEnd);
+			if( strlen($u)==0 )
+			{
+				return "YourName";
+			}
+			return $u;
+		} else
 			return "YourName";
-		}
-		return $u;
 	}
 	
 	function user_logout($errorMsg = null)
