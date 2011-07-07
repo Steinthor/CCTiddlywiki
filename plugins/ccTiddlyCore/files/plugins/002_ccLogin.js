@@ -72,9 +72,10 @@ config.macros.ccLogin.refresh=function(place, reload, error){
 	submit.type="submit";
 	submit.style.display="none";
 	w.formElem.appendChild(submit);
-	var cookieValues=findToken(document.cookie);
-	if (cookieValues.txtUserName!==undefined){
-		w.formElem["username"].value=decodeURIComponent(cookieValues.txtUserName) ;
+	var cookieValues=cookieString(document.cookie).txtUserName;
+	alert(cookieValues);
+	if (cookieValues!==undefined){
+		w.formElem["username"].value=decodeURIComponent(cookieValues) ;
 	}
 	var footer = findRelated(form,"wizardFooter","className");
 	createTiddlyButton(w.footer,this.buttonLogin,this.buttonLoginToolTip,function() {
@@ -195,22 +196,10 @@ function findToken(cookieStash){
 	return output;
 };
 
-function cookieString(str){	
-	var cookies = str.split(";");
+function cookieString(str){	 //txtUserName:"[\w]*"
 	var output = {};
-	for(var c=0; c < cookies.length; c++){
-		var p = cookies[c].indexOf("=");
-		if(p != -1) {
-			var name = cookies[c].substr(0,p).trim();
-			var value = cookies[c].substr(p+1).trim();
-			if (name=='txtUserName'){
-				output.txtUserName=value;
-			}
-			if (name=='sessionToken'){
-				output.sessionToken=value;
-			}
-		}
-	}
+	output.txtUserName=str.match(/txtUserName:"[\w]*/).toString().slice(13);
+	output.sessionToken=str.match(/sessionToken=[\w]*/).toString().slice(13);
 	return output;
 }
 
