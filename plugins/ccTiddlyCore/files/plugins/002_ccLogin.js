@@ -73,7 +73,6 @@ config.macros.ccLogin.refresh=function(place, reload, error){
 	submit.style.display="none";
 	w.formElem.appendChild(submit);
 	var cookieValues=cookieString(document.cookie).txtUserName;
-	alert(cookieValues);
 	if (cookieValues!==undefined){
 		w.formElem["username"].value=decodeURIComponent(cookieValues) ;
 	}
