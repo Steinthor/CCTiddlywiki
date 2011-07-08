@@ -138,7 +138,6 @@ config.macros.ccLogin.doLogin=function(username, password, item, place){
 }
 
 config.macros.ccLogin.loginCallback=function(context,userParams){
-
 	if(!context.status)
 	{
 		config.macros.ccLogin.refresh(userParams.place, config.macros.ccLogin.msgLoginFailed);
@@ -148,6 +147,8 @@ config.macros.ccLogin.loginCallback=function(context,userParams){
 				var $ = jQuery;
 				story.refreshTiddler(story.findContainingTiddler(userParams.place).id.replace("tiddler", ""), null, true);			
 		}else{
+		setOption("txtUserName", context.username);
+		saveOption("txtUserName");
 							window.location.reload();	
 		}
 	}	 

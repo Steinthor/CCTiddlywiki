@@ -151,7 +151,7 @@
 			$del_data['user_id'] =$un;
 			db_record_delete('login_session',$del_data);
 		}
-		cookie_set('txtUserName', $un);
+		cookie_set("TiddlyWiki", preg_replace('/txtUserName:"[\w]*/', 'txtUserName:"'.$un, cookie_get('TiddlyWiki')));
  		cookie_set('sessionToken', $insert_data['session_token']);
 		$rs = db_record_insert('login_session',$insert_data);
 		if ($rs){
@@ -245,8 +245,9 @@
 				return "YourName";
 			}
 			return $u;
-		} else
+		} else {
 			return "YourName";
+		}
 	}
 	
 	function user_logout($errorMsg = null)
