@@ -198,8 +198,10 @@ function findToken(cookieStash){
 
 function cookieString(str){	 //txtUserName:"[\w]*"
 	var output = {};
-	output.txtUserName=str.match(/txtUserName:"[\w]*/).toString().slice(13);
-	output.sessionToken=str.match(/sessionToken=[\w]*/).toString().slice(13);
+	if(str.match(/txtUserName:"[\w]*/))
+		output.txtUserName=str.match(/txtUserName:"[\w]*/).toString().slice(13);
+	if(str.match(/sessionToken=[\w]*/))
+		output.sessionToken=str.match(/sessionToken=[\w]*/).toString().slice(13);
 	return output;
 }
 
