@@ -386,7 +386,10 @@ function cookie_set($k,$v)
 {
 	global $tiddlyCfg;
 	$expire =  time()+$tiddlyCfg['session_expire'];	
-	if(setcookie($k,$v, $expire,$tiddlyCfg['pref']['base_folder']))
+	$upath = $tiddlyCfg['pref']['base_folder'];
+	if(substr($upath, -1) != "/")
+		$upath .= "/";
+	if(setcookie($k,$v, $expire, $upath))
 		return true;
 	else
 		return false;
