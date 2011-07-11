@@ -47,7 +47,7 @@ if ($handle = opendir($folder)) {
         if ($file != "." && $file != "..") {
 			$loc = $folder."/".$file;
 			$file_size = array_reduce (array (" B", " KB", " MB"), create_function ('$a,$b', 'return is_numeric($a)?($a>=1024?$a/1024:number_format($a,2).$b):$a;'), filesize ($loc));
-			$out = "{'filename':'".$file."','fileSize':'".$file_size."', 'url':'".dirname(getUrl())."/uploads/".$w."/".$file."'},";
+			$out .= "{'filename':'".htmlentities($file)."','fileSize':'".$file_size."', 'url':'".str_replace(" ", "%20", dirname(getUrl())."/uploads/".$w."/".mb_convert_encoding($file, 'UTF-8', 'HTML-ENTITIES'))."'},";
 		}
 	}
 	if(isset($out))
