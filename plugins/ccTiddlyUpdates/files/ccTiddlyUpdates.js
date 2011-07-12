@@ -38,12 +38,14 @@ Story.prototype.onTiddlerMouseOver = function(e)
   return Story.prototype.onTiddlerMouseOver_orig.apply(this);
 }
 timeStamp01 = new Date()
+ccTimer = timeStamp01;
+ccDirty = false;
 ccLastUpdated = "";
 config.extensions.ccTiddlyUpdates = function ()
 {
-  updateMsg = function () 
+  updateMsg = function (cctime) 
   {
-    jQuery.post(window.url+"plugins/ccTiddlyUpdates/ccTiddlyUpdates.php",{ time: timeStamp01.convertToYYYYMMDDHHMM() }, function(xml) 
+	jQuery.post(window.url+"plugins/ccTiddlyUpdates/ccTiddlyUpdates.php",{ time: cctime.convertToYYYYMMDDHHMM() }, function(xml) 
     {
 		if(jQuery("status",xml).text() == "2") {
 			ccLastUpdated = "";
@@ -52,12 +54,14 @@ config.extensions.ccTiddlyUpdates = function ()
 		}
 		jQuery("message",xml).each(function(id) {
 			message = jQuery("message",xml).get(id);
-			if(jQuery("modifier",message).text() == config.options.txtUserName || store.getTiddlerText(jQuery("title",message).text()) == jQuery("content",message).text()) return; //you don't need to see your own changes..
-			ccdirty = store.isDirty();
+		
+			if(jQuery("modifier",message).text() == config.options.txtUserName || store.getTiddlerText(jQuery("title",message).text()) == jQuery("content",message).text()) return; //you don't need to see your own changes, or changes already within the wiki..
 			if(story.isDirty(jQuery("title",message).text())) {
-				displayMessage("Someone has updated this tiddler:"+jQuery("title",message).text()+".  Close it, then re-edit it");
+				displayMessage(jQuery("modifier",message).text()+" has updated this tiddler:"+jQuery("title",message).text()+".  Close it, then re-edit it when you see this alert disappear");
+				ccDirty = true;
 				return;
 			}
+			ccstoredirty = store.isDirty();
 			var newT = store.createTiddler(jQuery("title",message).text());
 			newT.text=jQuery("content",message).text();
 			newT.modifier=jQuery("modifier",message).text();
@@ -74,25 +78,28 @@ config.extensions.ccTiddlyUpdates = function ()
 			store.notify(newT.title, false);
 			story.refreshTiddler(newT.title,1,true);
 			store.notifyAll();
-			if (!ccdirty)
+			if (!ccstoredirty)
 				store.setDirty(false);
 			if(ccLastUpdated != newT.title) {
 				if (!version.extensions.displayCommentsPlugin) 
 				{
 					displayMessage(newT.modifier+" has modified: "+newT.title);
-					ccLastUpdated = newT.title;
 				} else 
 					displayComment(newT.modifier+" has modified: "+newT.title);
-					ccLastUpdated = newT.title;
+				ccLastUpdated = newT.title;
 			}
-    });
-  });
+		});
+	});
   }
   timeStamp02 = new Date();
-  if(timeStamp02-timeStamp01 > 60000)
-  {
-	updateMsg();
-    timeStamp01 = timeStamp02;
-  }
+	if(timeStamp02-timeStamp01 > 20000) {
+		updateMsg(ccTimer);
+		if(ccDirty) {
+			timeStamp01 = timeStamp02;
+		} else {
+			timeStamp01 = timeStamp02;
+			ccTimer = timeStamp01;
+		}
+	}
 }
 //}}}
