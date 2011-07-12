@@ -80,6 +80,7 @@ config.extensions.ccTiddlyUpdates = function ()
 				if (!version.extensions.displayCommentsPlugin) 
 				{
 					displayMessage(newT.modifier+" has modified: "+newT.title);
+					ccLastUpdated = newT.title;
 				} else 
 					displayComment(newT.modifier+" has modified: "+newT.title);
 					ccLastUpdated = newT.title;
