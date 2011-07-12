@@ -87,7 +87,7 @@ config.extensions.ccTiddlyUpdates = function ()
   });
   }
   timeStamp02 = new Date();
-  if(timeStamp02-timeStamp01 > 6000)
+  if(timeStamp02-timeStamp01 > 60000)
   {
 	updateMsg();
     timeStamp01 = timeStamp02;
