@@ -37,7 +37,7 @@ else $status_code = 1;
 echo "<?xml version=\"1.0\"?>\n";
 echo "<response>\n";
 echo "\t<status>$status_code</status>\n";
-echo "\t<time>".time()."</time>\n";
+echo "\t<time>".$time."</time>\n";
 
 if($status_code == 1)
 {
