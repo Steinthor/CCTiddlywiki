@@ -72,7 +72,6 @@ config.extensions.ccTiddlyUpdates = function ()
 			store.addTiddler(newT);
 			store.notify(newT.title, false);
 			story.refreshTiddler(newT.title,1,true);
-			store.notifyAll();
 			if (!ccdirty)
 				store.setDirty(false);
 			if(ccLastUpdated != newT.title) {
@@ -83,8 +82,9 @@ config.extensions.ccTiddlyUpdates = function ()
 					displayComment(newT.modifier+" has modified: "+newT.title);
 					ccLastUpdated = newT.title;
 			}
-    });
-  });
+		});
+		store.notifyAll();
+	});
   }
   timeStamp02 = new Date();
   if(timeStamp02-timeStamp01 > 60000)
