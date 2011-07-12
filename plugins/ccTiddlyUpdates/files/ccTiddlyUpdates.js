@@ -46,12 +46,13 @@ config.extensions.ccTiddlyUpdates = function ()
     jQuery.post(window.url+"plugins/ccTiddlyUpdates/ccTiddlyUpdates.php",{ time: timeStamp01.convertToYYYYMMDDHHMM() }, function(xml) 
     {
 		if(jQuery("status",xml).text() == "2") {
+			ccLastUpdated = "";
 			clearMessage();
 			return;
 		}
 		jQuery("message",xml).each(function(id) {
 			message = jQuery("message",xml).get(id);
-			if(jQuery("modifier",message).text() == config.options.txtUserName) return; //you don't need to see your own changes..
+			if(jQuery("modifier",message).text() == config.options.txtUserName || store.getTiddlerText(jQuery("title",message).text()) == jQuery("content",message).text()) return; //you don't need to see your own changes..
 			ccdirty = store.isDirty();
 			if(story.isDirty(jQuery("title",message).text())) {
 				displayMessage("Someone has updated this tiddler:"+jQuery("title",message).text()+".  Close it, then re-edit it");
@@ -72,6 +73,7 @@ config.extensions.ccTiddlyUpdates = function ()
 			store.addTiddler(newT);
 			store.notify(newT.title, false);
 			story.refreshTiddler(newT.title,1,true);
+			store.notifyAll();
 			if (!ccdirty)
 				store.setDirty(false);
 			if(ccLastUpdated != newT.title) {
@@ -82,9 +84,8 @@ config.extensions.ccTiddlyUpdates = function ()
 					displayComment(newT.modifier+" has modified: "+newT.title);
 					ccLastUpdated = newT.title;
 			}
-		});
-		store.notifyAll();
-	});
+    });
+  });
   }
   timeStamp02 = new Date();
   if(timeStamp02-timeStamp01 > 60000)
