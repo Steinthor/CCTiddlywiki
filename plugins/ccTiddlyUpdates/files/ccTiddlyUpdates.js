@@ -45,8 +45,14 @@ config.extensions.ccTiddlyUpdates = function ()
 {
   updateMsg = function (cctime) 
   {
-	jQuery.post(window.url+"plugins/ccTiddlyUpdates/ccTiddlyUpdates.php",{ time: cctime.convertToYYYYMMDDHHMM() }, function(xml) 
+	jQuery.post(window.url+"plugins/ccTiddlyUpdates/ccTiddlyUpdates.php",{ time: cctime.convertToYYYYMMDDHHMM() }, function(data) 
     {
+		if (jQuery.browser.msie){
+			xml = new ActiveXObject("Microsoft.XMLDOM");
+			xml.async = false;
+			xml.loadXML(data);
+		} 
+		else xml = data;
 		if(jQuery("status",xml).text() == "2") {
 			ccLastUpdated = "";
 			clearMessage();
@@ -92,7 +98,7 @@ config.extensions.ccTiddlyUpdates = function ()
 	});
   }
   timeStamp02 = new Date();
-	if(timeStamp02-timeStamp01 > 20000) {
+	if(timeStamp02-timeStamp01 > 2000) {
 		updateMsg(ccTimer);
 		if(ccDirty) {
 			timeStamp01 = timeStamp02;
