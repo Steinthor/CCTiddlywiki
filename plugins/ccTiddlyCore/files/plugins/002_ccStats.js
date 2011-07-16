@@ -57,14 +57,14 @@ config.macros.ccStats.dataCallback = function(status,params,responseText,uri,xhr
 		"html > body > #backstageCloak{height:"+window.innerHeight*2+"px;}"+
 		"#errorBox{border:1px solid #ccc;background-color: #fff; color:#111;padding:1em 2em; z-index:9999;}",'errorBoxStyles');
 		var box = document.getElementById('errorBox') || createTiddlyElement(document.body,'div','errorBox');
-		box.innerHTML =  "<a style='float:right' href='javascript:onclick=ccTiddlyAdaptor.hideError()'>"+ccTiddlyAdaptor.errorClose+"</a><h3>"+params.title+"</h3><br />";
+		box.innerHTML =  "<a style='float:right' href='javascript:onclick=config.macros.hideBox()'>"+ccTiddlyAdaptor.errorClose+"</a><h3>"+params.title+"</h3><br />";
 		box.style.position = 'absolute';
 		box.style.height= "460px";
 		box.style.width= "800px";
 		var img = createTiddlyElement(box, "img");
 		img.src = full;
-		ccTiddlyAdaptor.center(box);
-		ccTiddlyAdaptor.showCloak();
+		config.macros.center(box);
+		config.macros.showCloak();
 	}
 	var img = createTiddlyElement(div, "h2", null, null, params.title);
 	var img = createTiddlyElement(div, "img");

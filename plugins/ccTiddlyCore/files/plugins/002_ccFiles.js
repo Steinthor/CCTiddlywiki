@@ -95,18 +95,45 @@ function addOption(selectbox,text,value ){
 
 config.macros.ccFileImageBox = function(image){
 	var full = image.src;
-	setStylesheet(
+	jQuery.twStylesheet(
 	"#errorBox .button {padding:0.5em 1em; border:1px solid #222; background-color:#ccc; color:black; margin-right:1em;}\n"+
 	"html > body > #backstageCloak {height:"+window.innerHeight*2+"px;}"+
 	"#errorBox {border:1px solid #ccc;background-color: #fff; color:#111;padding:1em 2em; z-index:9999;}",'errorBoxStyles');
 	var box = document.getElementById('errorBox') || createTiddlyElement(document.body,'div','errorBox');
-	box.innerHTML =  "<a style='float:right' href='javascript:onclick=ccTiddlyAdaptor.hideError()'>"+ccTiddlyAdaptor.errorClose+"</a><h3>"+image.src+"</h3><br />";
+	box.innerHTML =  "<a style='float:right' href='javascript:onclick=config.macros.hideBox()'>"+ccTiddlyAdaptor.errorClose+"</a><h3>"+image.src+"</h3><br />";
 	box.style.position = 'absolute';
 	box.style.width= "800px";
 	var img = createTiddlyElement(box, "img");
 	img.src = full;
-	ccTiddlyAdaptor.center(box);
-	ccTiddlyAdaptor.showCloak();
+	config.macros.center(box);
+	config.macros.showCloak();
+}
+
+config.macros.center = function (el) {
+	var size = config.macros.getsize(el);
+	el.style.left = (Math.round(findWindowWidth()/2) - (size.width /2) + findScrollX())+'px';
+	el.style.top = (Math.round(findWindowHeight()/2) - (size.height /2) + findScrollY())+'px';
+}
+
+config.macros.getsize = function (el){
+	var x ={};
+	x.width = el.offsetWidth || el.style.pixelWidth;
+	x.height = el.offsetHeight || el.style.pixelHeight;
+	return x;
+}
+config.macros.showCloak = function(){
+	var cloak = document.getElementById('backstageCloak');
+	if (config.browser.isIE){
+		cloak.style.height = Math.max(document.documentElement.scrollHeight,document.documentElement.offsetHeight);
+		cloak.style.width = document.documentElement.scrollWidth;
+	}
+	cloak.style.display = "block";
+}
+
+config.macros.hideBox = function () {
+	element = document.getElementById('errorBox');
+	element.parentNode.removeChild(element);
+	document.getElementById('backstageCloak').style.display = "";
 }
 
 config.macros.ccFile.listAllCallback = function(status,params,responseText,uri,xhr){
