@@ -98,7 +98,7 @@ config.extensions.ccTiddlyUpdates = function ()
 	});
   }
   timeStamp02 = new Date();
-	if(timeStamp02-timeStamp01 > 2000) {
+	if(timeStamp02-timeStamp01 > 20000) {
 		updateMsg(ccTimer);
 		if(ccDirty) {
 			timeStamp01 = timeStamp02;
