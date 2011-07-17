@@ -58,7 +58,7 @@ if (isset($_FILES["userFile"]))
 			$err .= $ccT_msg['upload']['maxFileSize'];
 		} else {
 			$from =  $_FILES["userFile"]["tmp_name"];
-			$to = $folder."/".$_FILES["userFile"]["name"];
+			$to = $folder."/".utf8_decode($_FILES["userFile"]["name"]);
 			if(file_exists($to)) 
 			{
 				echo '<b>'.$ccT_msg['upload']['fileExists'].'</b>';
