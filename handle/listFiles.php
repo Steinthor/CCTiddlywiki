@@ -28,7 +28,7 @@ if(isset($a))
 {
 	if($a=="DELETEFILE")
 	{
-		echo unlink($_SERVER['DOCUMENT_ROOT'].dirname(dirname($_SERVER['SCRIPT_NAME']))."/uploads/".$w."/".$_POST['file']);
+		echo unlink($_SERVER['DOCUMENT_ROOT'].dirname(dirname($_SERVER['SCRIPT_NAME']))."/uploads/".$w."/".utf8_decode($_POST['file']));
 		exit;
 	}
 }
