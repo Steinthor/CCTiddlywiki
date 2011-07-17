@@ -499,6 +499,9 @@ function sendHeader($httpCode, $returnStr="", $processReport="", $stop=0)
 		case 410:
 			header("HTTP/1.1 410 Gone");//14 40min
 			break;
+		case 413:
+			header("HTTP/1.1 413 Request Entity Too Large");
+			break;
 		case 501:
 			header("HTTP/1.0 501 Not Implemented");
 			break;

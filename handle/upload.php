@@ -9,6 +9,12 @@ if(!user_session_validate())
 	exit;	
 }
 
+if (empty($_FILES) && empty($_POST) && isset($_SERVER['REQUEST_METHOD']) && strtolower($_SERVER['REQUEST_METHOD']) == 'post') {   
+    $poidsMax = ini_get('post_max_size');
+    echo("Your file is too big, post_max_size setting in php.ini is $poidsMax.");
+	sendHeader("413");
+	exit;
+} 
 
 if (!user_isAdmin($user['username'], $tiddlyCfg['workspace_name'])){
 	if ($tiddlyCfg['only_workspace_admin_can_upload']==1)
@@ -17,7 +23,6 @@ if (!user_isAdmin($user['username'], $tiddlyCfg['workspace_name'])){
 		exit;
 	}
 }
-
 
 if ($tiddlyCfg['workspace_name'] == "")
 	$w = "default";
@@ -34,8 +39,7 @@ if(!file_exists($folder))
 $err = ""; 
 $status = 0;
 if (isset($_FILES["userFile"]))
-{
-	
+{	
 	if (check_vals())
 	{
 		if (($_FILES["userFile"]["type"] == "image/gif") || ($_FILES["userFile"]["type"] == "image/jpeg")|| ($_FILES["userFile"]["type"] == "image/pjpeg"))
