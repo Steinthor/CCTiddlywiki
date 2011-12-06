@@ -2,7 +2,7 @@
 |Name|ccTiddlyUpdates for CCTW|
 |Source|http://sthor.tiddlyspot.com/#AjaxPluginForCCTW|
 |Version|0.0.6|
-|Author|[[Steinþór Jasonarson]]|
+|Author|[[Steinï¿½ï¿½r Jasonarson]]|
 |Code borrowed/copied from|Akash Mehta - http://articles.sitepoint.com/article/ajax-jquery/3|
 |License|unknown|
 |~CoreVersion|2.6.2|
@@ -71,6 +71,7 @@ config.extensions.ccTiddlyUpdates = function ()
 			var newT = store.createTiddler(jQuery("title",message).text());
 			newT.text=jQuery("content",message).text();
 			newT.modifier=jQuery("modifier",message).text();
+			newT.modified= Date.convertFromYYYYMMDDHHMM(jQuery("modified",message).text());
 			newT.tags=jQuery("tags",message).text().readBracketedList();
 			fieldArray = jQuery("fields",message).text().split("' ");
 
