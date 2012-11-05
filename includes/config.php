@@ -32,14 +32,14 @@ $tiddlyCfg['adminPassword'] = "";
 $tiddlyCfg['pref']['delete_other_sessions_on_login'] = 0; // deletes all previous sessions for a user when they login, set to 0 to allow multiple logins.  
 $tiddlyCfg['pref']['renew_session_on_each_request']  = 1; // if enabled will renew users session time on each save request
 $tiddlyCfg['users_required_in_db']=0; // users must be in the ccTiddly user database to log in.  designed for LDAP and OpenID, if set to 0 users do not need to be in the db
-$tiddlyCfg['can_create_account'] = 1; // users are allowed to register for an account 
-$tiddlyCfg['show_register_on_login'] = 1; // (needs can create account enabled to work)
+$tiddlyCfg['can_create_account'] = 0; // users are allowed to register for an account 
+$tiddlyCfg['show_register_on_login'] = 0; // (needs can create account enabled to work)
 
 // Workspaces
 
 $tiddlyCfg['allow_workspace_creation'] = 1;		//0=disable, 1=allow by public, ( 2=allow by user - not implemented yet) 
-$tiddlyCfg['create_workspace'] = 1;  // allow users to create a workspace 
-$tiddlyCfg['extract_admin_from_url']=0;// The admin user for each workspace when create will be taken from the URL.  If turned on it means the user SimonMcManus owns the workspace /SimonMcManus/.
+$tiddlyCfg['create_workspace'] = 0;  // allow users to create a workspace 
+$tiddlyCfg['extract_admin_from_url']= 0;// The admin user for each workspace when create will be taken from the URL.  If turned on it means the user SimonMcManus owns the workspace /SimonMcManus/.
 $tiddlyCfg['use_mod_rewrite'] = 1;  // 1=using mod_rewrite, 0=pass parameter via ?workspace=name
 
 
@@ -54,7 +54,7 @@ $tiddlyCfg['pref']['deligate_session_url'] = "http://server...";
 
 // OpenID
 
-$tiddlyCfg['pref']['openid_enabled'] = 1;  // openid not fully implented yet. 
+$tiddlyCfg['pref']['openid_enabled'] = 0;  // openid not fully implented yet. 
 
 // Offline Mode 
 // .tiddler and .js files to be loaded from the tiddlers directory when the user is takes ccTiddly in offline mode. 
@@ -125,6 +125,7 @@ array(	"text/plain",
 	  	"text/xml", 
 		"text/html", 
 		"application/msword", 
+		"application/vnd.openxmlformats-officedocument.wordprocessingml.document",
 		"application/mspowerpoint", 
 		"application/excel", 
 		"application/x-visio", 
@@ -176,7 +177,7 @@ $tiddlyCfg['tag_tiddler_with_modifier'] = 0;
 $tiddlyCfg['char_set'] = "utf8";
 $tiddlyCfg['hashseed'] = "aigijgij";
 $tiddlyCfg['default_anonymous_perm'] = "AUUU";
-$tiddlyCfg['default_user_perm'] = "AADD";
+$tiddlyCfg['default_user_perm'] = "AAAA";
 $tiddlyCfg['on_the_fly_workspace_creation'] = 0;
 $tiddlyCfg['pref']['utf8'] = 0;	
 
@@ -288,7 +289,7 @@ Notes :
 
 //default privileges
 $tiddlyCfg['privilege_misc']['undefined_privilege'] = "D";		//defined what should undefined (U) be treated as
-$tiddlyCfg['privilege_misc']['default_privilege'] = "AAUU";		//default privilege for all group and tags
+$tiddlyCfg['privilege_misc']['default_privilege'] = "UUUU";		//default privilege for all group and tags
 //default privileges for certain groups, applied after default_privilege
 //		it is in the form: $tiddlyCfg['privilege_misc']['group_default_privilege']['<group name>']
 $tiddlyCfg['privilege_misc']['group_default_privilege']['anonymous'] = $tiddlyCfg['default_anonymous_perm'];
